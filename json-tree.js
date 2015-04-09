@@ -21,10 +21,10 @@
                         '<div draggable>' +
                             '<span  class="key" ng-click="utils.clickNode(childs[key])" >{{ key }}: </span>' +
                             '<span ng-hide="childs[key].isObject()">' +
-                                '<input ng-if="childs[key].type() === \'boolean\'" type="checkbox" ng-model="json[key]"/>' +
-                                '<input ng-if="childs[key].type() === \'number\'" type="number" ng-model="json[key]"/>' +
-                                '<textarea ng-if="childs[key].type() === \'function\'" ng-model="jsonFn[key]" ng-init="utils.textarea.init(key)" ng-change="utils.textarea.onChange(key)" ng-focus="utils.textarea.onFocus($event, key)" ng-blur="utils.textarea.onBlur(key)"></textarea>' +
-                                '<input ng-if="childs[key].type() !== \'number\' && childs[key].type() !== \'function\'" type="text" ng-model="json[key]" ng-change="utils.validateNode(key)" placeholder="null"/>' +
+                                '<input ng-if="childs[key].type() === \'boolean\'" type="checkbox" ng-model="json[key]" ng-readonly="isReadonly"/>' +
+                                '<input ng-if="childs[key].type() === \'number\'" type="number" ng-model="json[key]" ng-readonly="isReadonly"/>' +
+                                '<textarea ng-if="childs[key].type() === \'function\'" ng-model="jsonFn[key]" ng-init="utils.textarea.init(key)" ng-change="utils.textarea.onChange(key)" ng-focus="utils.textarea.onFocus($event, key)" ng-blur="utils.textarea.onBlur(key)" ng-disabled="isReadonly"></textarea>' +
+                                '<input ng-if="childs[key].type() !== \'number\' && childs[key].type() !== \'function\'" type="text" ng-model="json[key]" ng-change="utils.validateNode(key)" placeholder="null" ng-readonly="isReadonly"/>' +
                             '</span>' +
                             '<json-tree json="json[key]" edit-level="{{editLevel}}" collapsed-level="{{+collapsedLevel - 1}}" node="childs[key]" timeout="{{timeout}}" ng-show="childs[key].isObject()"></json-tree>' +
                             '<span class="reset" ng-dblclick="utils.resetNode(key)" ng-show="node.isHighEditLevel" title="reset"> ~ </span>' +
@@ -307,7 +307,10 @@
                         isCollapsed: ($scope.collapsedLevel && +$scope.collapsedLevel) ? (+$scope.collapsedLevel <= 0) : true, /* set up isCollapsed properties, by default - true */
 
                         /* check editing level is high */
-                        isHighEditLevel: $scope.editLevel !== "low",
+                        isHighEditLevel: $scope.editLevel !== "low" && $scope.editLevel !== "readonly",
+
+                        /* check editing level is readonly */
+                        isReadonly: $scope.editLevel === "readonly",
 
                         /* if childs[key] is dragging now, dragChildKey matches to key  */
                         dragChildKey: null,

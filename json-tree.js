@@ -27,14 +27,14 @@
                                 '<input ng-if="childs[key].type() !== \'number\' && childs[key].type() !== \'function\'" type="text" ng-model="json[key]" ng-change="utils.validateNode(key)" placeholder="null"/>' +
                             '</span>' +
                             '<json-tree json="json[key]" edit-level="{{editLevel}}" collapsed-level="{{+collapsedLevel - 1}}" node="childs[key]" timeout="{{timeout}}" ng-show="childs[key].isObject()"></json-tree>' +
-                            '<span class="reset" ng-dblclick="utils.resetNode(key)" ng-show="node.isHighEditLevel"> ~ </span>' +
-                            '<span class="remove" ng-dblclick="utils.removeNode(key)" ng-show="node.isHighEditLevel">-</span>' +
+                            '<span class="reset" ng-dblclick="utils.resetNode(key)" ng-show="node.isHighEditLevel" title="reset"> ~ </span>' +
+                            '<span class="remove" ng-dblclick="utils.removeNode(key)" ng-show="node.isHighEditLevel" title="remove"> - </span>' +
                             '<span class="comma" ng-hide="utils.wrap.isLastIndex(node, $index + 1)">,</span>' +
                         '</div>' +
                     '</li>' +
                 '</ul>' +
                 '<span ng-bind="utils.wrap.end(node)"></span>' +
-                '<span class="add" ng-show="node.isHighEditLevel && node.isObject()" ng-click="addTpl = !addTpl; inputKey = null; inputValue = null"> + </span>' +
+                '<span class="add" ng-show="node.isHighEditLevel && node.isObject()" ng-click="addTpl = !addTpl; inputKey = null; inputValue = null" title="add"> + </span>' +
                 '<span ng-show="(addTpl && node.isHighEditLevel) || false">' +
                     '<span ng-show="node.type() === \'object\'"><input type="text" ng-model="inputKey" placeholder="key"/>: <input type="text" ng-model="inputValue" placeholder="value"/></span>' +
                     '<span ng-show="node.type() === \'array\'"><input type="text" ng-model="inputValue" placeholder="value"/></span>' +

@@ -59,6 +59,11 @@ If you want to operate only with key-values of the nodes and to avoid transforma
 <json-tree json='jsonData' edit-level='low'></json-tree>
 ```
 
+Besides, you can set, you can keep all the nodes non-editable by setting `edit-level` attribute to **readony** like:
+```html
+<json-tree json='jsonData' edit-level='readonly'></json-tree>
+```
+
 You can also customize initial depth of tree view by adding `collapsed-level` attribute like, that takes a numeric value:
 ```html
 <json-tree json='jsonData' collapsed-level='2'></json-tree>

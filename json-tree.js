@@ -23,7 +23,7 @@
                             '<span ng-hide="childs[key].isObject()">' +
                                 '<input ng-if="childs[key].type() === \'boolean\'" type="checkbox" ng-model="json[key]" ng-readonly="node.isReadonly"/>' +
                                 '<input ng-if="childs[key].type() === \'number\'" type="number" ng-model="json[key]" ng-readonly="node.isReadonly"/>' +
-                                '<textarea ng-if="childs[key].type() === \'function\'" ng-model="jsonFn[key]" ng-init="utils.textarea.init(key)" ng-change="utils.textarea.onChange(key)" ng-focus="utils.textarea.onFocus($event, key)" ng-blur="utils.textarea.onBlur(key)" ng-disabled="node.isReadonly"></textarea>' +
+                                '<textarea ng-if="childs[key].type() === \'function\'" ng-model="jsonFn[key]" ng-init="utils.textarea.init(key)" ng-change="utils.textarea.onChange(key)" ng-focus="utils.textarea.onFocus($event, key)" ng-blur="utils.textarea.onBlur(key)" ng-readonly="node.isReadonly"></textarea>' +
                                 '<input ng-if="childs[key].type() !== \'number\' && childs[key].type() !== \'function\'" type="text" ng-model="json[key]" ng-change="utils.validateNode(key)" placeholder="null" ng-readonly="node.isReadonly"/>' +
                             '</span>' +
                             '<json-tree json="json[key]" edit-level="{{editLevel}}" collapsed-level="{{+collapsedLevel - 1}}" node="childs[key]" timeout="{{timeout}}" ng-show="childs[key].isObject()"></json-tree>' +

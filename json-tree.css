@@ -17,6 +17,7 @@ json-tree input[type="number"]{
 json-tree textarea {
     width: 5em;
     height: 12px;
+    color: #d6e9c9;
     padding-top: 0px;
     margin-bottom: -4px;
     border-color: gray;

@@ -68,3 +68,6 @@ json-tree .empty {
     border: 1px dashed darkred;
     background-color: #e2efff;
 }
+json-tree span[ng-click] {
+    cursor: pointer;
+}

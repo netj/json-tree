@@ -44,19 +44,21 @@
               '</span>' +
               // isReadonly
               '<span ng-if="node.isReadonly">' +
-                '<span ng-bind="utils.wrap.start(node)"></span>' +
-                '<span ng-bind="node.isCollapsed ? utils.wrap.middle(node) : \'&nbsp;&nbsp;&nbsp;\'" ng-click="utils.clickNode(node)"></span>' +
-                '<ul ng-hide="node.isCollapsed">' +
-                    '<li ng-repeat="key in utils.keys(json) track by key">' +
-                        '<div>' +
-                            '<span class="key" ng-click="utils.clickNode(childs[key])" >{{ key }}: </span>' +
-                            '<span ng-hide="childs[key].isObject()">{{json[key] | json}}</span>' +
-                            '<json-tree ng-show="childs[key].isObject()" json="json[key]" edit-level="{{editLevel}}" collapsed-level="{{+collapsedLevel - 1}}" node="childs[key]" timeout="{{timeout}}"></json-tree>' +
-                            '<span class="comma" ng-if="!utils.wrap.isLastIndex(node, $index + 1)">,</span>' +
-                        '</div>' +
-                    '</li>' +
-                '</ul>' +
-                '<span ng-bind="utils.wrap.end(node)"></span>' +
+                '<span ng-if="!node.isObject()">{{node.type() === \'undefined\' ? null : json | json}}</span>' +
+                '<span ng-if="node.isObject()">' +
+                    '<span ng-bind="utils.wrap.start(node)"></span>' +
+                    '<span ng-bind="node.isCollapsed ? utils.wrap.middle(node) : \'&nbsp;&nbsp;&nbsp;\'" ng-click="utils.clickNode(node)"></span>' +
+                    '<ul ng-if="!node.isCollapsed">' +
+                        '<li ng-repeat="key in utils.keys(json) track by key">' +
+                            '<div>' +
+                                '<span class="key" ng-click="utils.clickNode(childs[key])" >{{ key }}: </span>' +
+                                '<json-tree json="json[key]" edit-level="{{editLevel}}" collapsed-level="{{+collapsedLevel - 1}}" node="childs[key]" timeout="{{timeout}}"></json-tree>' +
+                                '<span class="comma" ng-if="!utils.wrap.isLastIndex(node, $index + 1)">,</span>' +
+                            '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                    '<span ng-bind="utils.wrap.end(node)"></span>' +
+                '</span>' +
               '</span>';
 
             function getTemplatePromise() {
@@ -365,7 +367,7 @@
 
                     /* define build template function */
                     scope.build = function(_scope){
-                        if (scope.node.isObject()){
+                        if (scope.node.isReadonly || scope.node.isObject()){
                             templatePromise.then(function(tpl) {
                                 element.html('').append($compile(tpl)(_scope));
                             });
